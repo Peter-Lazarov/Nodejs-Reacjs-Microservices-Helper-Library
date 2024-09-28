@@ -1,0 +1,11 @@
+npm init -y
+npm install express
+npm install -D @babel/cli @babel/preset-env @babel/preset-typescript @types/express @types/jsonwebtoken
+npm install typescript
+    to work commnad tsc it need to be install globally sudo npm install -g typescript
+tsc --init
+npm install @elastic/elasticsearch
+npm install http-status-codes
+npm install jsonwebtoken
+npm install winston winston-elasticsearch
+
