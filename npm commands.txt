@@ -8,4 +8,4 @@ npm install @elastic/elasticsearch
 npm install http-status-codes
 npm install jsonwebtoken
 npm install winston winston-elasticsearch
-
+npm install cloudinary

@@ -80,8 +80,8 @@ export class ServerError extends CustomError {
   }
 }
 
-export interface ErrnoException extends Error {
-  errno?: number;
+export interface ErorrException extends Error {
+  erorr?: number;
   code?: string;
   path?: string;
   syscall?: string;
