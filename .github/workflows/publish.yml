@@ -10,6 +10,8 @@ jobs:
     permissions:
       contents: read
       packages: write
+    env:
+      NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
@@ -17,8 +19,6 @@ jobs:
           node-version: '20.x'
       - run: npm install
       - run: npm run build
-      - env:
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
           echo "@Peter-Lazarov:registry=https://npm.pkg.github.com" > ~/.npmrc
           echo "//npm.pkg.github.com/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
