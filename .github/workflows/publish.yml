@@ -18,8 +18,14 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: |
-          echo "@Peter-Lazarov:registry=https://npm.pkg.github.com" > build/.npmrc
-          echo "//npm.pkg.github.com/:_authToken=$NPM_TOKEN" >> build/.npmrc
+          echo "@Peter-Lazarov:registry=https://npm.pkg.github.com" > ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: cat ~/.npmrc  # Debugging step to check .npmrc content
+      - run: echo "NPM_TOKEN is $NPM_TOKEN"  # Debugging step to verify token visibility
+        env:
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm publish
         working-directory: ./build
         env:
