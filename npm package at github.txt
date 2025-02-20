@@ -1,0 +1,58 @@
+The most important part is paths to files so they can set variables and tokens
+
+/.npmrc
+/.github/workflows/publish.yml
+
+
+env:
+  NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }} - write it above from place that is going to be used
+
+${{ secrets.GITHUB_TOKEN }} - this is get automatically from github
+
+echo "@Peter-Lazarov:registry=https://npm.pkg.github.com" > ~/.npmrc - watch good where the npmrc file is
+echo "//npm.pkg.github.com/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+
+example of publish yml file
+name: Publish
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    env:
+      NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+      - run: npm install
+      - run: npm run build
+      - run: |
+          echo "@Peter-Lazarov:registry=https://npm.pkg.github.com" > ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+      - run: npm publish
+        working-directory: ./build
+
+
+Manually publish if needed
+------------------------------------------------------------
+Linux konsole and from folder where the library is
+
+npm login
+peter-lazarov
+YOUR_GITHUB_TOKEN
+email
+
+//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+@your-username:registry=https://npm.pkg.github.com
+
+npm adduser --registry=https://npm.pkg.github.com
+
+npm publish
