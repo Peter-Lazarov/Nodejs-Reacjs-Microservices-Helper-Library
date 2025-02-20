@@ -1,0 +1,7 @@
+node_modules
+*.log
+.DS_Store
+dist
+docker-volumes/
+
+secret.txt

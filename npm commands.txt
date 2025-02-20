@@ -1,0 +1,30 @@
+npm init -y
+npm install express
+npm install -D @babel/cli @babel/preset-env @babel/preset-typescript @types/express @types/jsonwebtoken
+npm install typescript
+    to work commnad tsc it need to be install globally sudo npm install -g typescript
+tsc --init
+npm install @elastic/elasticsearch
+npm install http-status-codes
+npm install jsonwebtoken
+npm install winston winston-elasticsearch
+npm install cloudinary
+
+  //npm install git+https://github.com/Peter-Lazarov/Nodejs-Reacjs-Microservices-Helper-Library.git
+
+//How to use this Library in all Microservices
+//In every microservices do
+npm install git+https://github.com/Peter-Lazarov/Nodejs-Reacjs-Microservices-Helper-Library.git
+
+09-library-shared/build/src/ to (current service)04-user-service/node_modules/@peter-lazarov/nodejs-reacjs-microservices-helper-library/src/
+
+    //to use this library is needed at the installed node_modules path at the library to copy the content from
+    09-library-shared/build/src/ because it can be installed only from github and these build files were not be copied
+
+----------
+error
+at new URL (node:internal/url:818:25)
+    at getUsernameAndPassword (/home/peter/Documents/_JavaScript/Udemy - microservices/Nodejs-Reacjs-Microservices/microservices/04-user-service/node_modules/@elastic/src/client.ts:466:38)
+
+current service/src/config.ts must have line that point to
+dotenv.config({path: '.env.dev'});
