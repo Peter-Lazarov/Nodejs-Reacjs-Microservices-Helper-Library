@@ -1,4 +1,3 @@
-
 name: Publish
 on:
   push:
@@ -19,8 +18,8 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: |
-          echo @Peter-Lazarov:https://npm.pkg.github.com/ > build/.npmrc
-          echo '//npm.pkg.github.com/:_authToken=${NPM_TOKEN}' >> build/.npmrc
+          echo "@Peter-Lazarov:registry=https://npm.pkg.github.com" > ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - run: npm publish
         working-directory: ./build
         env:
