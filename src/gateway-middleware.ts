@@ -4,8 +4,14 @@ import { NotAuthorizedError } from './error-handler';
 import fs from 'fs';
 import path from 'path';
 
-const secretPath = path.resolve(__dirname, 'secret.txt');
-const apiGatewayToken = fs.readFileSync(secretPath, 'utf8').trim();
+const secretPath = path.resolve(__dirname, '../../../../../../../.gateway-test');
+let apiGatewayToken = '';
+if (fs.existsSync(secretPath)) {
+  apiGatewayToken = fs.readFileSync(secretPath, 'utf8').trim();
+  //console.log(apiGatewayToken);
+} else {
+  console.log(`The file does not exist. Please create the file at the expected path: ${secretPath} with the gateway token.`);
+}
 
 const tokens: string[] = ['auth', 'seller', 'gig', 'search', 'buyer', 'message', 'order', 'review'];
 

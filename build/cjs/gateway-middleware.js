@@ -7,8 +7,14 @@ var _errorHandler = require("./error-handler");
 var _fs = _interopRequireDefault(require("fs"));
 var _path = _interopRequireDefault(require("path"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-const secretPath = _path.default.resolve(__dirname, 'secret.txt');
-const apiGatewayToken = _fs.default.readFileSync(secretPath, 'utf8').trim();
+const secretPath = _path.default.resolve(__dirname, '../../../../../../../.gateway-test');
+let apiGatewayToken = '';
+if (_fs.default.existsSync(secretPath)) {
+  apiGatewayToken = _fs.default.readFileSync(secretPath, 'utf8').trim();
+  //console.log(apiGatewayToken);
+} else {
+  console.log(`The file does not exist. Please create the file at the expected path: ${secretPath} with the gateway token.`);
+}
 const tokens = ['auth', 'seller', 'gig', 'search', 'buyer', 'message', 'order', 'review'];
 function verifyGatewayRequest(req, _res, next) {
   var _req$headers, _req$headers2;

@@ -6,8 +6,15 @@ var jsonwebtoken_1 = tslib_1.__importDefault(require("jsonwebtoken"));
 var error_handler_1 = require("./error-handler");
 var fs_1 = tslib_1.__importDefault(require("fs"));
 var path_1 = tslib_1.__importDefault(require("path"));
-var secretPath = path_1.default.resolve(__dirname, 'secret.txt');
-var apiGatewayToken = fs_1.default.readFileSync(secretPath, 'utf8').trim();
+var secretPath = path_1.default.resolve(__dirname, '../../../../../../../.gateway-test');
+var apiGatewayToken = '';
+if (fs_1.default.existsSync(secretPath)) {
+    apiGatewayToken = fs_1.default.readFileSync(secretPath, 'utf8').trim();
+    //console.log(apiGatewayToken);
+}
+else {
+    console.log("The file does not exist. Please create the file at the expected path: ".concat(secretPath, " with the gateway token."));
+}
 var tokens = ['auth', 'seller', 'gig', 'search', 'buyer', 'message', 'order', 'review'];
 function verifyGatewayRequest(req, _res, next) {
     var _a, _b;
